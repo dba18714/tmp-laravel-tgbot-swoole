@@ -37,6 +37,7 @@ class TelegramController extends Controller
                     ]);
                     
                     // 记录发送响应
+                    $processingTime = round((microtime(true) - $startTime) * 1000, 2);
                     Log::info('Message processed', [
                         'text' => $text,
                         'processing_time_ms' => $processingTime
