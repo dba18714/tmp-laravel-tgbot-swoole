@@ -10,6 +10,8 @@ class TelegramController extends Controller
 {
     public function webhook(Request $request)
     {
+        $startTime = microtime(true);
+        
         try {
             // 获取更新
             $update = Telegram::getWebhookUpdates();
@@ -28,13 +30,17 @@ class TelegramController extends Controller
 
                 // 处理文本消息
                 if ($text) {
+                    $processingTime = round((microtime(true) - $startTime) * 1000, 2);
                     $response = Telegram::sendMessage([
                         'chat_id' => $chat_id,
-                        'text' => 'Laravel 你说: ' . $text,
+                        'text' => "Laravel 你说: {$text}\n处理用时: {$processingTime}ms",
                     ]);
                     
                     // 记录发送响应
-                    Log::info('Message sent', ['response' => $response]);
+                    Log::info('Message processed', [
+                        'text' => $text,
+                        'processing_time_ms' => $processingTime
+                    ]);
                 }
             }
 
