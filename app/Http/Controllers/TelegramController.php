@@ -30,7 +30,7 @@ class TelegramController extends Controller
                 if ($text) {
                     $response = Telegram::sendMessage([
                         'chat_id' => $chat_id,
-                        'text' => '你说: ' . $text,
+                        'text' => 'Laravel 你说: ' . $text,
                     ]);
                     
                     // 记录发送响应
