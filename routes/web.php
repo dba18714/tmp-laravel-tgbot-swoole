@@ -17,6 +17,3 @@ use App\Http\Controllers\TelegramController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::post('/api/telegram/webhook', [TelegramController::class, 'webhook']);
-Route::get('/api/telegram/set-webhook', [TelegramController::class, 'setWebhook']);
