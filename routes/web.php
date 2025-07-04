@@ -15,5 +15,15 @@ use App\Http\Controllers\TelegramController;
 */
 
 Route::get('/', function () {
+    if (function_exists('opcache_get_status')) {
+        $status = opcache_get_status();
+        if ($status && isset($status['opcache_enabled']) && $status['opcache_enabled']) {
+            return 'Opcache 已开启';
+        } else {
+            return 'Opcache 未开启';
+        }
+    }
+    return 'Opcache 扩展未安装';
+    
     return view('welcome');
 });
