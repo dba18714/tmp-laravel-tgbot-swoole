@@ -21,3 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/telegram/webhook', [TelegramController::class, 'webhook']);
 Route::get('/telegram/set-webhook', [TelegramController::class, 'setWebhook']); 
+
+Route::get('/opcache-status', function () {
+    if (function_exists('opcache_get_status')) {
+        $status = opcache_get_status();
+        if ($status && isset($status['opcache_enabled']) && $status['opcache_enabled']) {
+            return 'Opcache 已开启';
+        } else {
+            return 'Opcache 未开启';
+        }
+    }
+    return 'Opcache 扩展未安装';
+});
