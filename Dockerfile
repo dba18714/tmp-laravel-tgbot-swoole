@@ -43,4 +43,4 @@ ENV ENABLE_WEB=true \
     ENABLE_REDIS=false 
 
 EXPOSE 7001
-CMD ["php", "/www/artisan", "octane:start", "--host=0.0.0.0", "--port=7001"] 
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"] 
