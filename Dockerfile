@@ -14,20 +14,22 @@ RUN CFLAGS="-O0" install-php-extensions pcntl && \
 
 WORKDIR /www
 
-COPY .docker /
+COPY . .
 
-# Add build arguments
-ARG CACHEBUST
-ARG REPO_URL
-ARG BRANCH_NAME
+# COPY .docker /
 
-RUN echo "Attempting to clone branch: ${BRANCH_NAME} from ${REPO_URL} with CACHEBUST: ${CACHEBUST}" && \
-    rm -rf ./* && \
-    rm -rf .git && \
-    git config --global --add safe.directory /www && \
-    git clone --depth 1 --branch ${BRANCH_NAME} ${REPO_URL} .
+# # Add build arguments
+# ARG CACHEBUST
+# ARG REPO_URL
+# ARG BRANCH_NAME
 
-COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# RUN echo "Attempting to clone branch: ${BRANCH_NAME} from ${REPO_URL} with CACHEBUST: ${CACHEBUST}" && \
+#     rm -rf ./* && \
+#     rm -rf .git && \
+#     git config --global --add safe.directory /www && \
+#     git clone --depth 1 --branch ${BRANCH_NAME} ${REPO_URL} .
+
+# COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN composer install --no-cache --no-dev \
     && php artisan storage:link \
