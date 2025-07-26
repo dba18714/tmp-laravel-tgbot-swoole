@@ -221,4 +221,17 @@ return [
 
     'max_execution_time' => 30,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Swoole Tick Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the Swoole server's tick functionality. You may
+    | disable the tick if you don't need it to avoid potential issues with
+    | task workers. The tick is used for periodic tasks and cleanup.
+    |
+    */
+
+    'tick' => env('OCTANE_SWOOLE_TICK', false),
+
 ];
