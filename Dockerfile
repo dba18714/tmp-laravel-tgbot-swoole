@@ -29,7 +29,7 @@ COPY . .
 #     git config --global --add safe.directory /www && \
 #     git clone --depth 1 --branch ${BRANCH_NAME} ${REPO_URL} .
 
-# COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN composer install --no-cache --no-dev \
     && php artisan storage:link \
