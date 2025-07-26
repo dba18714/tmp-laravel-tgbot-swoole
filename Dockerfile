@@ -33,6 +33,11 @@ COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN composer install --no-cache --no-dev \
     && php artisan storage:link \
+    && php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan route:clear \
+    && php artisan view:clear \
+    && chmod +x /www/start-octane.sh \
     && chown -R www:www /www \
     && chmod -R 775 /www \
     && mkdir -p /data \

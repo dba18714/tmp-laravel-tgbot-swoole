@@ -94,12 +94,11 @@ return [
         ],
 
         TickReceived::class => [
-            ...Octane::prepareApplicationForNextOperation(),
-            //
+            // Disabled to prevent handleTick() errors
         ],
 
         TickTerminated::class => [
-            //
+            // Disabled to prevent handleTick() errors
         ],
 
         OperationTerminated::class => [
